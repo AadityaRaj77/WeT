@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, View, Button, TextInput, SafeAreaView, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, Button, TextInput, SafeAreaView, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator } from "react-native";
 
 export default function Index() {
   const [city, setCity] = useState("");
@@ -34,7 +34,8 @@ export default function Index() {
       };
   return (
       <ScrollView contentContainerStyle={styles.container}>
-        <TextInput placeholder="Enter City" style={{ borderWidth: 1, borderColor: "blue", padding: 10, margin: 10, borderRadius: 10 }} />
+        <TextInput placeholder="Enter City" value={city}
+          onChangeText={setCity} style={{ borderWidth: 1, borderColor: "blue", padding: 10, margin: 10, borderRadius: 10 }} />
         <TouchableOpacity
   style={{
     backgroundColor: 'blue',
@@ -44,22 +45,28 @@ export default function Index() {
     margin: 10,
   }}
 >
-  <Text style={{ color: 'white', fontWeight: 'bold' }}>Search</Text>
+  <Text onPress={fetchWeather} style={{ color: 'white', fontWeight: 'bold' }}>Search</Text>
 </TouchableOpacity>
-        <Text style={{fontSize:40, fontWeight:"semibold", justifyContent:'center', textAlign:"center",
-        }}>Weather</Text>
-        <View style={styles.info}>
-          <Text style={styles.infohead}>Temperature</Text>
-          <Text style={styles.maininfo}>{weather.temp}°C</Text>
-        </View>
-        <View style={styles.info}>
-          <Text style={styles.infohead}>Humidity</Text>
-          <Text style={styles.maininfo}>{weather.humidity}%</Text>
-        </View>
-        <View style={styles.info}>
-          <Text style={styles.infohead}>Wind</Text>
-          <Text style={styles.maininfo}>{weather.windSpeed} m/s</Text>
-        </View>
+{loading && <ActivityIndicator size="large" style={{ margin: 20 }} />}
+        {weather? (
+          <>
+          <Text style={{fontSize:40, fontWeight:"semibold", justifyContent:'center', textAlign:"center",
+          }}>Weather</Text>
+          <View style={styles.info}>
+            <Text style={styles.infohead}>Temperature</Text>
+            <Text style={styles.maininfo}>{weather.temp}°C</Text>
+          </View>
+          <View style={styles.info}>
+            <Text style={styles.infohead}>Humidity</Text>
+            <Text style={styles.maininfo}>{weather.humidity}%</Text>
+          </View>
+          <View style={styles.info}>
+            <Text style={styles.infohead}>Wind</Text>
+            <Text style={styles.maininfo}>{weather.windSpeed} m/s</Text>
+          </View></> 
+        ): !loading && (
+          <Text style={styles.prompt}>City not found or enter a city above.</Text>
+        )}
       </ScrollView>
   );
 }
@@ -86,5 +93,11 @@ const styles = StyleSheet.create({
     color:'white',
     fontWeight: 'bold',
     textAlign:'center'
+  },
+  prompt: {
+    textAlign: "center",
+    marginTop: 30,
+    fontSize: 16,
+    color: "#666",
   }
 });
