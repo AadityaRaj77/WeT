@@ -9,12 +9,12 @@
     }
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "env.d.ts",
+    "babel.config.js",
+    "tsconfig.json",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "app/App.tsx"  ],
-"compilerOptions": {
-  "types": ["./env.d.ts"]
-}
+  ]
 }
