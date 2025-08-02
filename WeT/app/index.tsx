@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_KEY } from "@env";
 import {
   Text,
   View,
@@ -20,8 +21,6 @@ export default function Index() {
   } | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [searched, setSearched] = useState<boolean>(false);  
-
-  const API_KEY = "48ab7588f7de2ea964d935e8edd1fe10";
 
   const fetchWeather = async () => {
     if (!city.trim()) 
