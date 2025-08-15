@@ -7,6 +7,9 @@
     "icon": "./assets/images/cum.png",
     "scheme": "wet",
     "userInterfaceStyle": "automatic",
+    "packagerOpts": {
+      "hostType": "lan"
+    },
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
@@ -16,7 +19,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#000000"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.reactive_dev.WeT"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +41,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "686fb9b7-6d97-4d13-9ed5-4356f6b8bc5a"
+      }
     }
   }
 }
